@@ -1,10 +1,10 @@
 package net.lyncas.service;
 
 
+import net.lyncas.dtos.AuthDto;
 import net.lyncas.dtos.PersonDto;
 
 import net.lyncas.dtos.PersonResponseDto;
-import net.lyncas.dtos.UpdatePersonDto;
 import net.lyncas.entities.PersonEntity;
 import net.lyncas.repository.PersonRepository;
 import org.springframework.stereotype.Service;
@@ -17,6 +17,7 @@ import java.util.Optional;
 public class PersonService {
 
     private final PersonRepository personRepository;
+    private AuthDto personEntity;
 
     public PersonService(PersonRepository personRepository){
         this.personRepository = personRepository;
@@ -32,11 +33,6 @@ public class PersonService {
         }
         return responseDtos;
     }
-
-//    public PersonResponseDto findById(Long personId) throws Exception {
-//        return personRepository.findById(personId)
-//                .orElseThrow(() -> new Exception("Usuário não encontrado."));
-//    }
 
     public PersonResponseDto findById(Long personId) throws Exception {
         Optional<PersonEntity> userById = personRepository.findById(personId);
@@ -57,11 +53,17 @@ public class PersonService {
         return newPersonResponseDto;
     }
 
+    public PersonResponseDto updateUser(Long personId, PersonDto updatingPersonDto) throws Exception {
+        Optional<PersonEntity> userById = personRepository.findById(personId);
+        if(userById.isPresent()){
+            String password;
+            if(personEntity.getPassword() == null || personEntity.getPassword().isEmpty()){
+                password = userById.get().getAuthentication().getPassword();
+            } else {
+                password = personEntity.password;
+            }
 
-    public PersonResponseDto updateUser(Long personId, UpdatePersonDto updatingPersonDto) throws Exception {
-        Optional<PersonEntity> byId = personRepository.findById(personId);
-        if(byId.isPresent()){
-            PersonEntity personEntity = byId.get();
+            PersonEntity personEntity = userById.get();
             personEntity.setName(updatingPersonDto.getName());
             personEntity.setLastname(updatingPersonDto.getLastname());
             personEntity.setEmail(updatingPersonDto.getEmail());
@@ -74,6 +76,10 @@ public class PersonService {
             throw new Exception("Usuário não encontrado.");
         }
    }
+
+    private AuthDto userById() {
+        return null;
+    }
 
     public void delete(Long personId){
         Optional<PersonEntity> personEntity = personRepository.findById(personId);

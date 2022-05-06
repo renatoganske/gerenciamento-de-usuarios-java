@@ -105,4 +105,9 @@ public class PersonEntity{
     public void setAuthentication(AuthenticationEntity authentication) {
         this.authentication = authentication;
     }
+
+    public Boolean getStatus() {
+        Boolean status = null;
+        return status;
+    }
 }

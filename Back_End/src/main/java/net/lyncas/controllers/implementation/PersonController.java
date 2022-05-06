@@ -3,8 +3,6 @@ package net.lyncas.controllers.implementation;
 import net.lyncas.dtos.PersonDto;
 
 import net.lyncas.dtos.PersonResponseDto;
-import net.lyncas.dtos.UpdatePersonDto;
-import net.lyncas.entities.PersonEntity;
 import net.lyncas.service.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -53,11 +51,11 @@ public class PersonController {
     @PutMapping("/{personId}")
     public ResponseEntity<PersonResponseDto> updateUser(
             @PathVariable Long personId,
-            @Valid@RequestBody UpdatePersonDto updatePersonDto) {
+            @Valid@RequestBody PersonDto personDto) {
 
         PersonResponseDto personResponseDto = null;
         try {
-            personResponseDto = service.updateUser(personId, updatePersonDto);
+            personResponseDto = service.updateUser(personId, personDto);
         } catch (Exception e) {
             System.out.println(e);
             return ResponseEntity.notFound().build();
