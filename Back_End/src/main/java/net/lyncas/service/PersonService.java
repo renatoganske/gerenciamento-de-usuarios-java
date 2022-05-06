@@ -70,6 +70,8 @@ public class PersonService {
             personEntity.setEmail(updatingPersonDto.getEmail());
             personEntity.setPhone(updatingPersonDto.getPhone());
             personEntity.setBirth_date(updatingPersonDto.getBirth_date());
+
+
             personRepository.save(personEntity);
             PersonResponseDto updated = new PersonResponseDto(personEntity);
             return updated;
