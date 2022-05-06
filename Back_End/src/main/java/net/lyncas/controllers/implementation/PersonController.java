@@ -8,8 +8,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.util.UriComponentsBuilder;
 
 import javax.validation.Valid;
+import java.net.URI;
 import java.util.List;
 
 @RestController
@@ -43,9 +45,10 @@ public class PersonController {
 
     @PostMapping("/newUser")
     public ResponseEntity<PersonResponseDto> saveUser(
-            @Valid @RequestBody PersonDto newPersonDTO){
+            @Valid @RequestBody PersonDto newPersonDTO, UriComponentsBuilder uriBuilder){
         PersonResponseDto persistedPerson = service.saveUser(newPersonDTO, true);
-        return new ResponseEntity<>(persistedPerson, HttpStatus.OK);
+        URI uri = uriBuilder.path("/users/{id}").buildAndExpand(newPersonDTO.getPersonId()).toUri();
+        return ResponseEntity.created(uri).body(persistedPerson);
     }
 
     @PutMapping("/{personId}")

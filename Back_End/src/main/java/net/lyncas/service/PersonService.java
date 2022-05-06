@@ -50,6 +50,7 @@ public class PersonService {
         PersonEntity personEntity = new PersonEntity(personDto, status);
         PersonEntity newPersonEntity = personRepository.save(personEntity);
         PersonResponseDto newPersonResponseDto = new PersonResponseDto(newPersonEntity);
+
         return newPersonResponseDto;
     }
 
