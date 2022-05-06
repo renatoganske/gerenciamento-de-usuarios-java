@@ -1,12 +1,12 @@
 package net.lyncas.service;
 
 
-import net.lyncas.dtos.AuthDto;
 import net.lyncas.dtos.PersonDto;
+
 import net.lyncas.dtos.PersonResponseDto;
+import net.lyncas.dtos.UpdatePersonDto;
 import net.lyncas.entities.PersonEntity;
 import net.lyncas.repository.PersonRepository;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -33,19 +33,32 @@ public class PersonService {
         return responseDtos;
     }
 
-    public PersonEntity findById(Long personId) throws Exception {
-        return personRepository.findById(personId)
-                .orElseThrow(() -> new Exception("Usuário não encontrado."));
+//    public PersonResponseDto findById(Long personId) throws Exception {
+//        return personRepository.findById(personId)
+//                .orElseThrow(() -> new Exception("Usuário não encontrado."));
+//    }
+
+    public PersonResponseDto findById(Long personId) throws Exception {
+        Optional<PersonEntity> userById = personRepository.findById(personId);
+        if (userById.isPresent()) {
+            PersonEntity personEntity = userById.get();
+            PersonResponseDto user = new PersonResponseDto(personEntity);
+            return user;
+        } else {
+            throw new Exception("Usuário não encontrado.");
+        }
     }
 
-    public PersonResponseDto saveUser(PersonDto personDto, AuthDto authDto) {
-        PersonEntity personEntity = new PersonEntity(personDto);
+
+    public PersonResponseDto saveUser(PersonDto personDto, Boolean status) {
+        PersonEntity personEntity = new PersonEntity(personDto, status);
         PersonEntity newPersonEntity = personRepository.save(personEntity);
         PersonResponseDto newPersonResponseDto = new PersonResponseDto(newPersonEntity);
         return newPersonResponseDto;
     }
 
-    public PersonResponseDto updateUser(Long personId, PersonDto updatingPersonDto) throws Exception {
+
+    public PersonResponseDto updateUser(Long personId, UpdatePersonDto updatingPersonDto) throws Exception {
         Optional<PersonEntity> byId = personRepository.findById(personId);
         if(byId.isPresent()){
             PersonEntity personEntity = byId.get();
@@ -53,7 +66,7 @@ public class PersonService {
             personEntity.setLastname(updatingPersonDto.getLastname());
             personEntity.setEmail(updatingPersonDto.getEmail());
             personEntity.setPhone(updatingPersonDto.getPhone());
-            personEntity.setBirthDate(updatingPersonDto.getBirthDate());
+            personEntity.setBirth_date(updatingPersonDto.getBirth_date());
             personRepository.save(personEntity);
             PersonResponseDto updated = new PersonResponseDto(personEntity);
             return updated;

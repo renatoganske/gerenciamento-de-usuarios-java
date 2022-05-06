@@ -3,45 +3,58 @@ package net.lyncas.entities;
 import net.lyncas.dtos.PersonDto;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 
 @Entity
 @Table(name="Person")
-public class PersonEntity {
+public class PersonEntity{
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "personId", nullable = false)
+    private Long personId;
+    @Column(nullable = false, length = 45 )
+    @NotEmpty(message = "Preencha o nome.")
+    private String name;
+    @Column(nullable = false, length = 45)
+    @NotEmpty(message = "Preencha o sobrenome.")
+    private String lastname;
+    @Column(nullable = false, unique = true, length = 45)
+    @NotEmpty(message = "Preencha um email válido.")
+    private String email;
+    @Column(nullable = false, length = 14)
+    @NotEmpty(message = "Preencha o telefone.")
+    private String phone;
+    @Column(nullable = false)
+    @NotNull(message = "Preencha a data de nascimento.")
+    private LocalDate birth_date;
+    @OneToOne (mappedBy = "personEntity", cascade = CascadeType.ALL)
+    private AuthenticationEntity authentication;
 
     public PersonEntity() {
     }
 
-    public PersonEntity(PersonDto personDto){
+    public PersonEntity(PersonDto personDto, Boolean status){
         this.personId = personDto.getPersonId();
         this.name = personDto.getName();
         this.lastname = personDto.getLastname();
         this.email = personDto.getEmail();
         this.phone = personDto.getPhone();
-        this.birthDate = personDto.getBirthDate();
+        this.birth_date = personDto.getBirth_date();
+        AuthenticationEntity auth = new AuthenticationEntity();
+        auth.setPassword(personDto.getAuth().getPassword());
+        auth.setPersonEntity(this);
+        auth.setStatus(status);
+        this.authentication = auth;
     }
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "idPessoa", nullable = false)
-    private Long personId;
-    @Column(nullable = false, length = 45 )
-    private String name;
-    @Column(nullable = false, length = 45)
-    private String lastname;
-    @Column(nullable = false, unique = true, length = 45)
-    private String email;
-    @Column(nullable = false, length = 14)
-    private String phone;
-    @Column(nullable = false)
-    private LocalDate birthDate;
-    @OneToOne (mappedBy = "personEntity", cascade = CascadeType.ALL)
-    private AuthenticationEntity authentication;
 
     public Long getPersonId() {
         return personId;
     }
 
-    public void setPersonId(Long personId) {
+    public void setpersonId(Long personId) {
         this.personId = personId;
     }
 
@@ -77,12 +90,12 @@ public class PersonEntity {
         this.phone = phone;
     }
 
-    public LocalDate getBirthDate() {
-        return birthDate;
+    public LocalDate getBirth_date() {
+        return birth_date;
     }
 
-    public void setBirthDate(LocalDate birthDate) {
-        this.birthDate = birthDate;
+    public void setBirth_date(LocalDate birth_date) {
+        this.birth_date = birth_date;
     }
 
     public AuthenticationEntity getAuthentication() {

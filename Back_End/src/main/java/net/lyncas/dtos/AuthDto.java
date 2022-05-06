@@ -1,19 +1,19 @@
 package net.lyncas.dtos;
 
+import org.hibernate.validator.constraints.Length;
+
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+
 public class AuthDto {
 
-
-    public String email;
-
+    @NotNull(message = "Campo obrigatório.")
+    @Pattern(regexp = "^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{6,}$", message = "A senha deve conter no mínimo 6 caracteres, "
+            + "sendo pelo menos um deles um número.")
+    @Length(min = 3, max = 50, message = "Digite uma senha válida.")
     public String password;
 
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
+    private Boolean status;
 
     public String getPassword() {
         return password;
@@ -23,6 +23,11 @@ public class AuthDto {
         this.password = password;
     }
 
-    public void setStatus(Boolean valueOf) {
+    public Boolean getStatus() {
+        return status;
+    }
+
+    public void setStatus(Boolean status) {
+        this.status = status;
     }
 }

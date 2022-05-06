@@ -1,10 +1,35 @@
 package net.lyncas.dtos;
 
 import net.lyncas.entities.PersonEntity;
+import org.hibernate.validator.constraints.Length;
 
+import javax.validation.Valid;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 
 public class UpdatePersonDto {
+
+
+    private Long personId;
+    @NotEmpty(message = "Campo obrigatório.")
+    @Length(min = 3, max = 45, message = "Digite um nome válido.")
+    private String name;
+    @NotEmpty(message = "Campo obrigatório.")
+    @Length(min = 3, max = 45, message = "Digite um sobrenome válido.")
+    private String lastname;
+    @NotEmpty(message = "Campo obrigatório.")
+    @Length(min = 3, max = 45, message = "Digite um email válido.")
+    private String email;
+    @NotEmpty(message = "Campo obrigatório.")
+    @Length(min = 3, max = 14, message = "Digite um telefone válido.")
+    private String phone;
+    @NotNull(message = "Cadastre uma data de nascimento válida.")
+    private LocalDate birth_date;
+    @NotNull
+    @Valid
+    private Boolean status;
+    private String password;
 
     public UpdatePersonDto() {
 
@@ -16,17 +41,9 @@ public class UpdatePersonDto {
         this.lastname = personEntity.getLastname();
         this.email = personEntity.getEmail();
         this.phone = personEntity.getPhone();
-        this.birthDate = personEntity.getBirthDate();
+        this.birth_date = personEntity.getBirth_date();
+        this.status = personEntity.getAuthentication().getStatus();
     }
-
-    private Long personId;
-    private String name;
-    private String lastname;
-    private String email;
-    private String phone;
-    private LocalDate birthDate;
-    private String senha;
-    private Boolean status;
 
     public Long getPersonId() {
         return personId;
@@ -68,20 +85,12 @@ public class UpdatePersonDto {
         this.phone = phone;
     }
 
-    public LocalDate getBirthDate() {
-        return birthDate;
+    public LocalDate getBirth_date() {
+        return birth_date;
     }
 
-    public void setBirthDate(LocalDate birthDate) {
-        this.birthDate = birthDate;
-    }
-
-    public String getSenha() {
-        return senha;
-    }
-
-    public void setSenha(String senha) {
-        this.senha = senha;
+    public void setBirth_date(LocalDate birth_date) {
+        this.birth_date = birth_date;
     }
 
     public Boolean getStatus() {
@@ -92,4 +101,11 @@ public class UpdatePersonDto {
         this.status = status;
     }
 
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
 }

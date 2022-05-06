@@ -1,43 +1,53 @@
 package net.lyncas.dtos;
 
 
-
 import net.lyncas.entities.PersonEntity;
+import org.hibernate.validator.constraints.Length;
 
+import javax.validation.Valid;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 
 public class PersonDto {
 
-    private Long PersonId;
+    private Long personId;
+    @NotEmpty(message = "Campo obrigatório.")
+    @Length(min = 3, max = 45, message = "Digite um nome válido.")
     private String name;
+    @NotEmpty(message = "Campo obrigatório.")
+    @Length(min = 3, max = 45, message = "Digite um sobrenome válido.")
     private String lastname;
+    @NotEmpty(message = "Campo obrigatório.")
+    @Length(min = 3, max = 45, message = "Digite um email válido.")
     private String email;
+    @NotEmpty(message = "Campo obrigatório.")
+    @Length(min = 3, max = 14, message = "Digite um telefone válido.")
     private String phone;
-    private LocalDate birthDate;
-    private String password;
-    private Boolean status;
-
+    @NotNull(message = "Cadastre uma data de nascimento válida.")
+    private LocalDate birth_date;
+    @NotNull
+    @Valid
+    private AuthDto auth;
 
     public PersonDto(){
-
     }
 
     public PersonDto(PersonEntity personEntity){
-        this.PersonId = personEntity.getPersonId();
+        this.personId = personEntity.getPersonId();
         this.name = personEntity.getName();
         this.lastname = personEntity.getLastname();
         this.email = personEntity.getEmail();
         this.phone = personEntity.getPhone();
-        this.birthDate = personEntity.getBirthDate();
-        this.status = personEntity.getAuthentication().getStatus();
+        this.birth_date = personEntity.getBirth_date();
     }
 
     public Long getPersonId() {
-        return PersonId;
+        return personId;
     }
 
     public void setPersonId(Long personId) {
-        this.PersonId = personId;
+        this.personId = personId;
     }
 
     public String getName() {
@@ -72,28 +82,20 @@ public class PersonDto {
         this.phone = phone;
     }
 
-    public LocalDate getBirthDate() {
-        return birthDate;
+    public LocalDate getBirth_date() {
+        return birth_date;
     }
 
-    public void setBirthDate(LocalDate birthDate) {
-        this.birthDate = birthDate;
+    public void setBirth_date(LocalDate birth_date) {
+        this.birth_date = birth_date;
     }
 
-    public String getPassword() {
-        return password;
+    public AuthDto getAuth() {
+        return auth;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public Boolean getStatus() {
-        return status;
-    }
-
-    public void setStatus(Boolean status) {
-        this.status = status;
+    public void setAuth(AuthDto auth) {
+        this.auth = auth;
     }
 }
 

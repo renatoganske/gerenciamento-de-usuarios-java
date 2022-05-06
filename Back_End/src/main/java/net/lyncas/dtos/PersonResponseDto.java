@@ -1,32 +1,35 @@
 package net.lyncas.dtos;
 
 import net.lyncas.entities.PersonEntity;
+import org.hibernate.validator.constraints.Length;
 
+import javax.validation.Valid;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 
 public class PersonResponseDto {
-
-    public PersonResponseDto(){
-
-    }
-
-    public PersonResponseDto(PersonEntity personEntity){
-        this.personId = personEntity.getPersonId();
-        this.name = personEntity.getName();
-        this.lastname = personEntity.getLastname();
-        this.email = personEntity.getEmail();
-        this.phone = personEntity.getPhone();
-        this.birthDate = personEntity.getBirthDate();
-    }
 
     private Long personId;
     private String name;
     private String lastname;
     private String email;
     private String phone;
-    private LocalDate birthDate;
+    private LocalDate birth_date;
     private Boolean status;
 
+    public PersonResponseDto(){
+    }
+
+    public PersonResponseDto(PersonEntity personEntity) {
+        this.personId = personEntity.getPersonId();
+        this.name = personEntity.getName();
+        this.lastname = personEntity.getLastname();
+        this.email = personEntity.getEmail();
+        this.phone = personEntity.getPhone();
+        this.birth_date = personEntity.getBirth_date();
+        this.status = personEntity.getAuthentication().getStatus();
+    }
 
     public Long getPersonId() {
         return personId;
@@ -68,16 +71,19 @@ public class PersonResponseDto {
         this.phone = phone;
     }
 
-    public LocalDate getBirthDate() {
-        return birthDate;
+    public LocalDate getBirth_date() {
+        return birth_date;
     }
 
-    public void setBirthDate(LocalDate birthDate) {
-        this.birthDate = birthDate;
+    public void setBirth_date(LocalDate birth_date) {
+        this.birth_date = birth_date;
     }
 
-    public Boolean getStatus() {return status;}
+    public Boolean getStatus() {
+        return status;
+    }
 
-    public void setStatus(Boolean status) {this.status = status;}
-
+    public void setStatus(Boolean status) {
+        this.status = status;
+    }
 }
