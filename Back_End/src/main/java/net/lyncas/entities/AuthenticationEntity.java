@@ -6,6 +6,7 @@ import lombok.Data;
 import javax.persistence.*;
 import javax.validation.Valid;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Pattern;
 
 @Entity
 @Table(name="Authentication")
@@ -14,8 +15,10 @@ public class AuthenticationEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idAuth;
-    @NotEmpty(message = "Campo obrigatório.")
+    @NotEmpty (message = "Digite uma senha.")
     @Column(length = 255, nullable = false)
+    @Pattern(regexp = "^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{6,}$", message = "A senha deve conter no mínimo 6 caracteres, "
+            + "sendo pelo menos um deles um número.")
     private String password;
     @Column(nullable = false)
     private Boolean status;

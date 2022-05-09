@@ -1,4 +1,4 @@
-package net.lyncas.config;
+package net.lyncas.config.validation;
 
 import net.lyncas.dtos.FormErrorDto;
 import org.springframework.beans.factory.annotation.Autowired;

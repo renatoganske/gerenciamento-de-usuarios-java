@@ -17,7 +17,6 @@ import java.util.Optional;
 public class PersonService {
 
     private final PersonRepository personRepository;
-    private AuthDto personEntity;
 
     public PersonService(PersonRepository personRepository){
         this.personRepository = personRepository;
@@ -46,32 +45,37 @@ public class PersonService {
     }
 
 
-    public PersonResponseDto saveUser(PersonDto personDto, Boolean status) {
+    public PersonResponseDto saveUser(PersonDto personDto, Boolean status) throws Exception {
         PersonEntity personEntity = new PersonEntity(personDto, status);
-        PersonEntity newPersonEntity = personRepository.save(personEntity);
-        PersonResponseDto newPersonResponseDto = new PersonResponseDto(newPersonEntity);
+        if(personRepository.existsByEmail(personDto.getEmail())) {
+            throw new Exception("Esse e-mail já existe.");
+        }
+        else {
+            PersonEntity newPersonEntity = personRepository.save(personEntity);
+            PersonResponseDto newPersonResponseDto = new PersonResponseDto(newPersonEntity);
 
-        return newPersonResponseDto;
-    }
+            return newPersonResponseDto;
+        }}
 
     public PersonResponseDto updateUser(Long personId, PersonDto updatingPersonDto) throws Exception {
         Optional<PersonEntity> userById = personRepository.findById(personId);
         if(userById.isPresent()){
             String password;
-            if(personEntity.getPassword() == null || personEntity.getPassword().isEmpty()){
+            if(updatingPersonDto.getAuth().getPassword() == null || updatingPersonDto.getAuth().getPassword().isEmpty()){
                 password = userById.get().getAuthentication().getPassword();
             } else {
-                password = personEntity.password;
+                password = updatingPersonDto.getAuth().getPassword();
             }
 
             PersonEntity personEntity = userById.get();
+            personEntity.setpersonId(updatingPersonDto.getPersonId());
             personEntity.setName(updatingPersonDto.getName());
             personEntity.setLastname(updatingPersonDto.getLastname());
             personEntity.setEmail(updatingPersonDto.getEmail());
             personEntity.setPhone(updatingPersonDto.getPhone());
             personEntity.setBirth_date(updatingPersonDto.getBirth_date());
-
-
+            personEntity.getAuthentication().setStatus(updatingPersonDto.getAuth().getStatus());
+            personEntity.getAuthentication().setPassword(password);
             personRepository.save(personEntity);
             PersonResponseDto updated = new PersonResponseDto(personEntity);
             return updated;

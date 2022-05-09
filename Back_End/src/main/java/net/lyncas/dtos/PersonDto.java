@@ -1,10 +1,10 @@
 package net.lyncas.dtos;
 
 
+import net.lyncas.entities.AuthenticationEntity;
 import net.lyncas.entities.PersonEntity;
 import org.hibernate.validator.constraints.Length;
 
-import javax.validation.Valid;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
@@ -26,9 +26,7 @@ public class PersonDto {
     private String phone;
     @NotNull(message = "Cadastre uma data de nascimento válida.")
     private LocalDate birth_date;
-    @NotNull
-    @Valid
-    private AuthDto auth;
+    private AuthenticationEntity authDto;
 
     public PersonDto(){
     }
@@ -40,6 +38,7 @@ public class PersonDto {
         this.email = personEntity.getEmail();
         this.phone = personEntity.getPhone();
         this.birth_date = personEntity.getBirth_date();
+        this.authDto = personEntity.getAuthentication();
     }
 
     public Long getPersonId() {
@@ -90,12 +89,12 @@ public class PersonDto {
         this.birth_date = birth_date;
     }
 
-    public AuthDto getAuth() {
-        return auth;
+    public AuthenticationEntity getAuth() {
+        return authDto;
     }
 
-    public void setAuth(AuthDto auth) {
-        this.auth = auth;
+    public void setAuth(AuthenticationEntity auth) {
+        this.authDto = auth;
     }
 }
 

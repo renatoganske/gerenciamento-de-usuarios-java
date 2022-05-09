@@ -6,7 +6,6 @@ import org.hibernate.validator.constraints.Length;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
 public class AuthDto {
@@ -14,13 +13,22 @@ public class AuthDto {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idAuth;
-    @NotNull(message = "Campo obrigatório.")
+
     @Pattern(regexp = "^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{6,}$", message = "A senha deve conter no mínimo 6 caracteres, "
             + "sendo pelo menos um deles um número.")
     @Length(min = 6, max = 50, message = "Digite uma senha válida.")
-    public String password;
+    private String password;
 
     private Boolean status;
+    private PersonEntity personEntity;
+
+    public Long getIdAuth() {
+        return idAuth;
+    }
+
+    public void setIdAuth(Long idAuth) {
+        this.idAuth = idAuth;
+    }
 
     public String getPassword() {
         return password;
@@ -38,8 +46,11 @@ public class AuthDto {
         this.status = status;
     }
 
-    public PersonEntity get() {
-        return null;
+    public PersonEntity getPersonEntity() {
+        return personEntity;
     }
 
+    public void setPersonEntity(PersonEntity personEntity) {
+        this.personEntity = personEntity;
+    }
 }

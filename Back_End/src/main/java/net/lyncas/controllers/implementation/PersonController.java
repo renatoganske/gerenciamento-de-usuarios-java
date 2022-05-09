@@ -45,7 +45,7 @@ public class PersonController {
 
     @PostMapping("/newUser")
             public ResponseEntity<PersonResponseDto> saveUser(
-                    @Valid @RequestBody PersonDto newPersonDTO, UriComponentsBuilder uriBuilder){
+                    @Valid @RequestBody PersonDto newPersonDTO, UriComponentsBuilder uriBuilder) throws Exception {
                 PersonResponseDto persistedPerson = service.saveUser(newPersonDTO, true);
                 URI uri = uriBuilder.path("/users/{id}").buildAndExpand(newPersonDTO.getPersonId()).toUri();
                 return ResponseEntity.created(uri).body(persistedPerson);
@@ -54,7 +54,7 @@ public class PersonController {
     @PutMapping("/{personId}")
     public ResponseEntity<PersonResponseDto> updateUser(
             @PathVariable Long personId,
-            @Valid@RequestBody PersonDto personDto) {
+            @Valid @RequestBody PersonDto personDto) {
 
         PersonResponseDto personResponseDto = null;
         try {
