@@ -1,4 +1,4 @@
-package net.lyncas.dtos;
+package net.lyncas.auth.security;
 
 import net.lyncas.entities.PersonEntity;
 import org.hibernate.validator.constraints.Length;
@@ -13,6 +13,7 @@ public class AuthDto {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idAuth;
+    private String  email;
 
     @Pattern(regexp = "^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{6,}$", message = "A senha deve conter no mínimo 6 caracteres, "
             + "sendo pelo menos um deles um número.")
@@ -20,7 +21,6 @@ public class AuthDto {
     private String password;
 
     private Boolean status;
-    private PersonEntity personEntity;
 
     public Long getIdAuth() {
         return idAuth;
@@ -28,6 +28,14 @@ public class AuthDto {
 
     public void setIdAuth(Long idAuth) {
         this.idAuth = idAuth;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getPassword() {
@@ -44,13 +52,5 @@ public class AuthDto {
 
     public void setStatus(Boolean status) {
         this.status = status;
-    }
-
-    public PersonEntity getPersonEntity() {
-        return personEntity;
-    }
-
-    public void setPersonEntity(PersonEntity personEntity) {
-        this.personEntity = personEntity;
     }
 }
