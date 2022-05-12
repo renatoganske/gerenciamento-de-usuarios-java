@@ -1,11 +1,7 @@
 package net.lyncas.dtos;
 
 import net.lyncas.entities.PersonEntity;
-import org.hibernate.validator.constraints.Length;
 
-import javax.validation.Valid;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 
 public class PersonResponseDto {

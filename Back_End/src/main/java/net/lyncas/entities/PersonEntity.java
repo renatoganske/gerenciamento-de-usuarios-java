@@ -9,7 +9,7 @@ import java.time.LocalDate;
 
 @Entity
 @Table(name="Person")
-public class PersonEntity{
+public class PersonEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -105,4 +105,5 @@ public class PersonEntity{
     public void setAuthentication(AuthenticationEntity authentication) {
         this.authentication = authentication;
     }
+
 }

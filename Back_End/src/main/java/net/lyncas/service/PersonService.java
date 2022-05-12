@@ -1,12 +1,11 @@
 package net.lyncas.service;
 
 
-import net.lyncas.dtos.AuthDto;
 import net.lyncas.dtos.PersonDto;
-
 import net.lyncas.dtos.PersonResponseDto;
 import net.lyncas.entities.PersonEntity;
 import net.lyncas.repository.PersonRepository;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -17,9 +16,11 @@ import java.util.Optional;
 public class PersonService {
 
     private final PersonRepository personRepository;
+    private final PasswordEncoder encoder;
 
-    public PersonService(PersonRepository personRepository){
+    public PersonService(PersonRepository personRepository, PasswordEncoder encoder){
         this.personRepository = personRepository;
+        this.encoder = encoder;
     }
 
     public List<PersonResponseDto> findAll() {
@@ -34,11 +35,11 @@ public class PersonService {
     }
 
     public PersonResponseDto findById(Long personId) throws Exception {
-        Optional<PersonEntity> userById = personRepository.findById(personId);
-        if (userById.isPresent()) {
-            PersonEntity personEntity = userById.get();
-            PersonResponseDto user = new PersonResponseDto(personEntity);
-            return user;
+        Optional<PersonEntity> personEntityById = personRepository.findById(personId);
+        if (personEntityById.isPresent()) {
+            PersonEntity personEntity = personEntityById.get();
+            PersonResponseDto person = new PersonResponseDto(personEntity);
+            return person;
         } else {
             throw new Exception("Usuário não encontrado.");
         }
@@ -51,6 +52,7 @@ public class PersonService {
             throw new Exception("Esse e-mail já existe.");
         }
         else {
+            personEntity.getAuthentication().setPassword(encoder.encode(personEntity.getAuthentication().getPassword()));
             PersonEntity newPersonEntity = personRepository.save(personEntity);
             PersonResponseDto newPersonResponseDto = new PersonResponseDto(newPersonEntity);
 
@@ -75,7 +77,7 @@ public class PersonService {
             personEntity.setPhone(updatingPersonDto.getPhone());
             personEntity.setBirth_date(updatingPersonDto.getBirth_date());
             personEntity.getAuthentication().setStatus(updatingPersonDto.getAuth().getStatus());
-            personEntity.getAuthentication().setPassword(password);
+            personEntity.getAuthentication().setPassword(encoder.encode(password));
             personRepository.save(personEntity);
             PersonResponseDto updated = new PersonResponseDto(personEntity);
             return updated;
@@ -84,12 +86,10 @@ public class PersonService {
         }
    }
 
-    private AuthDto userById() {
-        return null;
-    }
-
     public void delete(Long personId){
         Optional<PersonEntity> personEntity = personRepository.findById(personId);
             personRepository.delete(personEntity.get());
     }
+
+
 }

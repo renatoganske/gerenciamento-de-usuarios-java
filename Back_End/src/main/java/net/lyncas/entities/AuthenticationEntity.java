@@ -17,8 +17,6 @@ public class AuthenticationEntity {
     private Long idAuth;
     @NotEmpty (message = "Digite uma senha.")
     @Column(length = 255, nullable = false)
-    @Pattern(regexp = "^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{6,}$", message = "A senha deve conter no mínimo 6 caracteres, "
-            + "sendo pelo menos um deles um número.")
     private String password;
     @Column(nullable = false)
     private Boolean status;
