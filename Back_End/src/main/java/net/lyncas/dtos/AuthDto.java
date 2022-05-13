@@ -22,6 +22,9 @@ public class AuthDto {
 
     private Boolean status;
 
+    public AuthDto() {
+    }
+
     public Long getIdAuth() {
         return idAuth;
     }
