@@ -1,12 +1,7 @@
 package net.lyncas.entities;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.Data;
-
 import javax.persistence.*;
-import javax.validation.Valid;
 import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.Pattern;
 
 @Entity
 @Table(name="Authentication")
@@ -15,7 +10,7 @@ public class AuthenticationEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idAuth;
-    @NotEmpty (message = "Digite uma senha.")
+    @NotEmpty
     @Column(length = 255, nullable = false)
     private String password;
     @Column(nullable = false)

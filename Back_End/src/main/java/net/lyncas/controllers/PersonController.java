@@ -1,7 +1,6 @@
-package net.lyncas.controllers.implementation;
+package net.lyncas.controllers;
 
 import net.lyncas.dtos.PersonDto;
-
 import net.lyncas.dtos.PersonResponseDto;
 import net.lyncas.entities.PersonEntity;
 import net.lyncas.repository.PersonRepository;

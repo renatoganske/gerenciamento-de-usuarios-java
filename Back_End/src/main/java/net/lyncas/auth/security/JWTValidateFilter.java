@@ -67,3 +67,4 @@ public class JWTValidateFilter extends BasicAuthenticationFilter {
         return new UsernamePasswordAuthenticationToken(user,null, new ArrayList<>());
     }
 }
+

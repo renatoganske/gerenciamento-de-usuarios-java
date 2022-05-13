@@ -5,8 +5,10 @@ import net.lyncas.entities.AuthenticationEntity;
 import net.lyncas.entities.PersonEntity;
 import org.hibernate.validator.constraints.Length;
 
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import java.time.LocalDate;
 
 public class PersonDto {
@@ -19,13 +21,16 @@ public class PersonDto {
     @Length(min = 3, max = 45, message = "Digite um sobrenome válido.")
     private String lastname;
     @NotEmpty(message = "Campo obrigatório.")
-    @Length(min = 3, max = 45, message = "Digite um email válido.")
+    @Length(min = 3, max = 45)
+    @Email(regexp = ".+[@].+[\\.].+", message = "Digite um email válido.")
     private String email;
     @NotEmpty(message = "Campo obrigatório.")
     @Length(min = 3, max = 14, message = "Digite um telefone válido.")
     private String phone;
     @NotNull(message = "Cadastre uma data de nascimento válida.")
     private LocalDate birth_date;
+
+
     private AuthenticationEntity authDto;
 
     public PersonDto(){

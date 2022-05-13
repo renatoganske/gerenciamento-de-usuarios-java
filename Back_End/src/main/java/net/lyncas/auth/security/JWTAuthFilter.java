@@ -33,12 +33,12 @@ public class JWTAuthFilter extends UsernamePasswordAuthenticationFilter {
     public Authentication attemptAuthentication(HttpServletRequest request,
                                                 HttpServletResponse response) throws AuthenticationException {
         try {
-            AuthDto authDto = new ObjectMapper().
-                    readValue(request.getInputStream(), AuthDto.class);
+            LoginDto loginDto = new ObjectMapper().
+                    readValue(request.getInputStream(), LoginDto.class);
 
             return authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
-                    authDto.getEmail(),
-                    authDto.getPassword(),
+                    loginDto.getEmail(),
+                    loginDto.getPassword(),
                     new ArrayList<>()
             ));
 
@@ -63,3 +63,4 @@ public class JWTAuthFilter extends UsernamePasswordAuthenticationFilter {
         response.getWriter().flush();
     }
 }
+

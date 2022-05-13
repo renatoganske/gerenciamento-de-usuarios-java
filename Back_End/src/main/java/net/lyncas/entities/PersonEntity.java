@@ -16,19 +16,19 @@ public class PersonEntity {
     @Column(name = "personId", nullable = false)
     private Long personId;
     @Column(nullable = false, length = 45 )
-    @NotEmpty(message = "Preencha o nome.")
+    @NotEmpty
     private String name;
     @Column(nullable = false, length = 45)
-    @NotEmpty(message = "Preencha o sobrenome.")
+    @NotEmpty
     private String lastname;
     @Column(nullable = false, unique = true, length = 45)
-    @NotEmpty(message = "Preencha um email válido.")
+    @NotEmpty
     private String email;
     @Column(nullable = false, length = 14)
-    @NotEmpty(message = "Preencha o telefone.")
+    @NotEmpty
     private String phone;
     @Column(nullable = false)
-    @NotNull(message = "Preencha a data de nascimento.")
+    @NotNull
     private LocalDate birth_date;
     @OneToOne (mappedBy = "personEntity", cascade = CascadeType.ALL)
     private AuthenticationEntity authentication;

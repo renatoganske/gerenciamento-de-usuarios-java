@@ -1,4 +1,4 @@
-package net.lyncas.auth.security;
+package net.lyncas.dtos;
 
 import net.lyncas.entities.PersonEntity;
 import org.hibernate.validator.constraints.Length;
