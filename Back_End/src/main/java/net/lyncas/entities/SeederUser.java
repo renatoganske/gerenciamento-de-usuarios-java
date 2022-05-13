@@ -25,14 +25,15 @@ public class SeederUser implements CommandLineRunner {
             AuthenticationEntity auth = new AuthenticationEntity();
             auth.setIdAuth(1L);
             auth.setStatus(true);
-            auth.setPassword("ganske1");
+            auth.setPassword("$2a$12$cqhHDUx/xHN3NnozNoLtUextoNX9d4ujd377zpMAKFZ1kVyKShA0a");
+            //senha do usuário seeder: admin123
 
             PersonEntity seeder = new PersonEntity();
             seeder.setpersonId(1L);
             seeder.setAuthentication(auth);
             seeder.setName("Admin");
             seeder.setLastname("User");
-            seeder.setEmail("admin@admin.net");
+            seeder.setEmail("admin@admin.com");
             seeder.setPhone("(47)99999-9999");
             seeder.setBirth_date(LocalDate.now());
             auth.setPersonEntity(seeder);
