@@ -1,7 +1,5 @@
 package net.lyncas.entities;
 
-import net.lyncas.dtos.AuthDto;
-import net.lyncas.dtos.PersonDto;
 import net.lyncas.repository.PersonRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -30,12 +28,12 @@ public class SeederUser implements CommandLineRunner {
 
             PersonEntity seeder = new PersonEntity();
             seeder.setpersonId(1L);
-            seeder.setAuthentication(auth);
             seeder.setName("Admin");
             seeder.setLastname("User");
             seeder.setEmail("admin@admin.com");
             seeder.setPhone("(47)99999-9999");
             seeder.setBirth_date(LocalDate.now());
+            seeder.setAuthentication(auth);
             auth.setPersonEntity(seeder);
             personRepository.save(seeder);
         }

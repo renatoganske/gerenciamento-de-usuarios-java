@@ -8,27 +8,27 @@ import org.hibernate.validator.constraints.Length;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.time.LocalDate;
 
 public class PersonDto {
 
     private Long personId;
-    @NotEmpty(message = "Campo obrigatório.")
-    @Length(min = 3, max = 45, message = "Digite um nome válido.")
+    @NotEmpty(message = "{required.name.validation}")
+    @Size(min = 3, max = 45, message = "{size.validation}")
     private String name;
-    @NotEmpty(message = "Campo obrigatório.")
-    @Length(min = 3, max = 45, message = "Digite um sobrenome válido.")
+    @NotEmpty(message = "{required.lastname.validation}")
+    @Length(min = 3, max = 45, message = "{size.validation}")
     private String lastname;
-    @NotEmpty(message = "Campo obrigatório.")
+    @NotEmpty(message = "{required.email.validation}")
     @Length(min = 3, max = 45)
-    @Email(regexp = ".+[@].+[\\.].+", message = "Digite um email válido.")
+    @Email(regexp = ".+[@].+[\\.].+", message = "{size.validation}")
     private String email;
-    @NotEmpty(message = "Campo obrigatório.")
-    @Length(min = 3, max = 14, message = "Digite um telefone válido.")
+    @NotEmpty(message = "{required.phone.validation}")
+    @Length(min = 3, max = 14, message = "{size.validation}")
     private String phone;
-    @NotNull(message = "Cadastre uma data de nascimento válida.")
+    @NotNull(message = "{required.birth_date.validation}")
     private LocalDate birth_date;
-
 
     private AuthenticationEntity authDto;
 

@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
@@ -53,12 +54,12 @@ public class PersonController {
 
 
     @PostMapping("/newUser")
-            public ResponseEntity<PersonResponseDto> saveUser(
-                    @Valid @RequestBody PersonDto newPersonDTO, UriComponentsBuilder uriBuilder) throws Exception {
-                PersonResponseDto persistedPerson = service.saveUser(newPersonDTO, true);
-                URI uri = uriBuilder.path("/users/{id}").buildAndExpand(newPersonDTO.getPersonId()).toUri();
-                return ResponseEntity.created(uri).body(persistedPerson);
-            }
+    public ResponseEntity<PersonResponseDto> saveUser(
+            @Valid @RequestBody PersonDto newPersonDTO, UriComponentsBuilder uriBuilder){
+        PersonResponseDto persistedPerson = service.saveUser(newPersonDTO, true);
+        URI uri = uriBuilder.path("/users/{id}").buildAndExpand(newPersonDTO.getPersonId()).toUri();
+        return ResponseEntity.created(uri).body(persistedPerson);
+    }
 
     @PutMapping("/{personId}")
     public ResponseEntity<PersonResponseDto> updateUser(

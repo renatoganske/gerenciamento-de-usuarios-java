@@ -4,6 +4,8 @@ package net.lyncas.service;
 import net.lyncas.dtos.PersonDto;
 import net.lyncas.dtos.PersonResponseDto;
 import net.lyncas.entities.PersonEntity;
+import net.lyncas.errorHandling.exception.business.EmailRuleException;
+import net.lyncas.errorHandling.exception.business.FindByIdRuleException;
 import net.lyncas.repository.PersonRepository;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -34,22 +36,22 @@ public class PersonService {
         return responseDtos;
     }
 
-    public PersonResponseDto findById(Long personId) throws Exception {
+    public PersonResponseDto findById(Long personId) {
         Optional<PersonEntity> personEntityById = personRepository.findById(personId);
         if (personEntityById.isPresent()) {
             PersonEntity personEntity = personEntityById.get();
             PersonResponseDto person = new PersonResponseDto(personEntity);
             return person;
         } else {
-            throw new Exception("Usuário não encontrado.");
+            throw new FindByIdRuleException();
         }
     }
 
 
-    public PersonResponseDto saveUser(PersonDto personDto, Boolean status) throws Exception {
+    public PersonResponseDto saveUser(PersonDto personDto, Boolean status) {
         PersonEntity personEntity = new PersonEntity(personDto, status);
         if(personRepository.existsByEmail(personDto.getEmail())) {
-            throw new Exception("Esse e-mail já existe.");
+            throw new EmailRuleException();
         }
         else {
             personEntity.getAuthentication().setPassword(encoder.encode(personEntity.getAuthentication().getPassword()));
@@ -59,7 +61,7 @@ public class PersonService {
             return newPersonResponseDto;
         }}
 
-    public PersonResponseDto updateUser(Long personId, PersonDto updatingPersonDto) throws Exception {
+    public PersonResponseDto updateUser(Long personId, PersonDto updatingPersonDto) {
         Optional<PersonEntity> userById = personRepository.findById(personId);
         if(userById.isPresent()){
             String password;
@@ -82,7 +84,7 @@ public class PersonService {
             PersonResponseDto updated = new PersonResponseDto(personEntity);
             return updated;
         } else {
-            throw new Exception("Usuário não encontrado.");
+            throw new FindByIdRuleException();
         }
    }
 

@@ -1,11 +1,11 @@
 package net.lyncas.dtos;
 
-import net.lyncas.entities.PersonEntity;
 import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Pattern;
 
 public class AuthDto {
@@ -15,9 +15,9 @@ public class AuthDto {
     private Long idAuth;
     private String  email;
 
-    @Pattern(regexp = "^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{6,}$", message = "A senha deve conter no mínimo 6 caracteres, "
-            + "sendo pelo menos um deles um número.")
-    @Length(min = 6, max = 50, message = "Digite uma senha válida.")
+    @NotEmpty(message = "{required.password.validation}")
+    @Pattern(regexp = "^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{6,}$", message = "{password.rule}")
+    @Length(min = 6, max = 50, message = "{size.validation}")
     private String password;
 
     private Boolean status;
