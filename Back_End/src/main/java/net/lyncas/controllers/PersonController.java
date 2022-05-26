@@ -1,5 +1,6 @@
 package net.lyncas.controllers;
 
+import io.swagger.annotations.ApiParam;
 import net.lyncas.dtos.PersonDto;
 import net.lyncas.dtos.PersonResponseDto;
 import net.lyncas.entities.PersonEntity;
@@ -35,6 +36,12 @@ public class PersonController {
         this.encoder = encoder;
     }
 
+
+    @PostMapping("/login")
+    public void fakeLogin(@ApiParam("User") @RequestParam String email, @ApiParam("Password") @RequestParam String password) {
+        throw new IllegalStateException("This method shouldn't be called. It's implemented by Spring Security filters.");
+    }
+
     @GetMapping
     public ResponseEntity<List<PersonResponseDto>> findAll (){
         List<PersonResponseDto> listarPersonResponseDto = service.findAll();
@@ -56,7 +63,7 @@ public class PersonController {
     @PostMapping("/newUser")
     public ResponseEntity<PersonResponseDto> saveUser(
             @Valid @RequestBody PersonDto newPersonDTO, UriComponentsBuilder uriBuilder){
-        PersonResponseDto persistedPerson = service.saveUser(newPersonDTO, true);
+        PersonResponseDto persistedPerson = service.saveUser(newPersonDTO);
         URI uri = uriBuilder.path("/users/{id}").buildAndExpand(newPersonDTO.getPersonId()).toUri();
         return ResponseEntity.created(uri).body(persistedPerson);
     }
@@ -81,21 +88,4 @@ public class PersonController {
         service.delete(personId);
     }
 
-    @GetMapping("/passwordValidate")
-    public ResponseEntity<Boolean> passwordValidate(@RequestParam String email, @RequestParam String password){
-
-        Optional<PersonEntity> optPersonEntity = personRepository.findByEmail(email);
-        if(optPersonEntity.isEmpty())
-        {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(false);
-        }
-
-        PersonEntity personEntity = optPersonEntity.get();
-        boolean valid = encoder.matches(password, personEntity.getAuthentication().getPassword());
-
-        HttpStatus status = (valid) ? HttpStatus.OK : HttpStatus.UNAUTHORIZED;
-
-        return ResponseEntity.status(status).body(valid);
-
-    }
 }

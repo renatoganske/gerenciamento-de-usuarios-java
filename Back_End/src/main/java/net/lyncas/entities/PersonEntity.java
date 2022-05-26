@@ -36,25 +36,24 @@ public class PersonEntity {
     public PersonEntity() {
     }
 
-    public PersonEntity(PersonDto personDto, Boolean status){
-        this.personId = personDto.getPersonId();
-        this.name = personDto.getName();
-        this.lastname = personDto.getLastname();
-        this.email = personDto.getEmail();
-        this.phone = personDto.getPhone();
-        this.birth_date = personDto.getBirth_date();
-        AuthenticationEntity auth = new AuthenticationEntity();
-        auth.setPassword(personDto.getAuth().getPassword());
-        auth.setPersonEntity(this);
-        auth.setStatus(status);
-        this.authentication = auth;
-    }
+//    PersonEntity convertForPersonEntity(PersonDto personDto) {
+//        this.setPersonId(personDto.getPersonId());
+//        this.setName(personDto.getName());
+//        this.setLastname(personDto.getLastname());
+//        this.setEmail(personDto.getEmail());
+//        this.setPhone(personDto.getPhone());
+//        this.setBirth_date(personDto.getBirth_date());
+//        AuthenticationEntity authentication = new AuthenticationEntity();
+//        this.setAuthentication(authentication);
+//        this.getAuthentication().setStatus(personDto.getStatus());
+//        this.getAuthentication().setPersonEntity(this);
+//    }
 
     public Long getPersonId() {
         return personId;
     }
 
-    public void setpersonId(Long personId) {
+    public void setPersonId(Long personId) {
         this.personId = personId;
     }
 

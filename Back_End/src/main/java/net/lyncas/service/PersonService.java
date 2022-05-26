@@ -3,9 +3,11 @@ package net.lyncas.service;
 
 import net.lyncas.dtos.PersonDto;
 import net.lyncas.dtos.PersonResponseDto;
+import net.lyncas.entities.AuthenticationEntity;
 import net.lyncas.entities.PersonEntity;
 import net.lyncas.errorHandling.exception.business.EmailRuleException;
 import net.lyncas.errorHandling.exception.business.FindByIdRuleException;
+import net.lyncas.errorHandling.exception.business.PasswordRuleException;
 import net.lyncas.repository.PersonRepository;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -20,7 +22,7 @@ public class PersonService {
     private final PersonRepository personRepository;
     private final PasswordEncoder encoder;
 
-    public PersonService(PersonRepository personRepository, PasswordEncoder encoder){
+    public PersonService(PersonRepository personRepository, PasswordEncoder encoder) {
         this.personRepository = personRepository;
         this.encoder = encoder;
     }
@@ -47,38 +49,51 @@ public class PersonService {
         }
     }
 
-
-    public PersonResponseDto saveUser(PersonDto personDto, Boolean status) {
-        PersonEntity personEntity = new PersonEntity(personDto, status);
-        if(personRepository.existsByEmail(personDto.getEmail())) {
+    public PersonResponseDto saveUser(PersonDto personDto) {
+        PersonEntity personEntity = new PersonEntity();
+        if (personRepository.existsByEmail(personDto.getEmail())) {
             throw new EmailRuleException();
-        }
-        else {
-            personEntity.getAuthentication().setPassword(encoder.encode(personEntity.getAuthentication().getPassword()));
-            PersonEntity newPersonEntity = personRepository.save(personEntity);
-            PersonResponseDto newPersonResponseDto = new PersonResponseDto(newPersonEntity);
+        } else {
+            if (personDto.getPassword() == null || personDto.getPassword().isEmpty()) {
+                throw new PasswordRuleException();
+            } else {
+                personEntity.setPersonId(personDto.getPersonId());
+                personEntity.setName(personDto.getName());
+                personEntity.setLastname(personDto.getLastname());
+                personEntity.setEmail(personDto.getEmail());
+                personEntity.setPhone(personDto.getPhone());
+                personEntity.setBirth_date(personDto.getBirth_date());
+                AuthenticationEntity authentication = new AuthenticationEntity();
+                personEntity.setAuthentication(authentication);
+                personEntity.getAuthentication().setStatus(personDto.getStatus());
+                personEntity.getAuthentication().setPersonEntity(personEntity);
+                personEntity.getAuthentication().setPassword(encoder.encode(personDto.getPassword()));
+                PersonEntity newPersonEntity = personRepository.save(personEntity);
+                PersonResponseDto newPersonResponseDto = new PersonResponseDto(newPersonEntity);
 
-            return newPersonResponseDto;
-        }}
+                return newPersonResponseDto;
+            }
+        }
+    }
 
     public PersonResponseDto updateUser(Long personId, PersonDto updatingPersonDto) {
         Optional<PersonEntity> userById = personRepository.findById(personId);
-        if(userById.isPresent()){
+        if (userById.isPresent()) {
             String password;
-            if(updatingPersonDto.getAuth().getPassword() == null || updatingPersonDto.getAuth().getPassword().isEmpty()){
+            if (updatingPersonDto.getPassword() == null || updatingPersonDto.getPassword().isEmpty()) {
                 password = userById.get().getAuthentication().getPassword();
             } else {
-                password = updatingPersonDto.getAuth().getPassword();
+                password = updatingPersonDto.getPassword();
             }
 
             PersonEntity personEntity = userById.get();
-            personEntity.setpersonId(updatingPersonDto.getPersonId());
+            personEntity.setPersonId(updatingPersonDto.getPersonId());
             personEntity.setName(updatingPersonDto.getName());
             personEntity.setLastname(updatingPersonDto.getLastname());
             personEntity.setEmail(updatingPersonDto.getEmail());
             personEntity.setPhone(updatingPersonDto.getPhone());
             personEntity.setBirth_date(updatingPersonDto.getBirth_date());
-            personEntity.getAuthentication().setStatus(updatingPersonDto.getAuth().getStatus());
+            personEntity.getAuthentication().setStatus(updatingPersonDto.getStatus());
             personEntity.getAuthentication().setPassword(encoder.encode(password));
             personRepository.save(personEntity);
             PersonResponseDto updated = new PersonResponseDto(personEntity);
@@ -86,11 +101,11 @@ public class PersonService {
         } else {
             throw new FindByIdRuleException();
         }
-   }
+    }
 
-    public void delete(Long personId){
+    public void delete(Long personId) {
         Optional<PersonEntity> personEntity = personRepository.findById(personId);
-            personRepository.delete(personEntity.get());
+        personRepository.delete(personEntity.get());
     }
 
 

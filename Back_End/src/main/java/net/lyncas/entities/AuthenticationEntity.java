@@ -19,6 +19,9 @@ public class AuthenticationEntity {
     @JoinColumn(name = "personId", nullable = false)
     private PersonEntity personEntity;
 
+    public AuthenticationEntity() {
+    }
+
     public Long getIdAuth() {
         return idAuth;
     }
