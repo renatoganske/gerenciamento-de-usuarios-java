@@ -14,19 +14,22 @@ public class PersonDto {
     @NotEmpty(message = "required.name.validation")
     @Size(min = 3, max = 45, message = "size.validation")
     private String name;
+
     @NotEmpty(message = "required.lastname.validation")
     @Length(min = 3, max = 45, message = "size.validation")
     private String lastname;
+
     @NotEmpty(message = "required.email.validation")
     @Length(min = 3, max = 45)
     @Email(regexp = ".+[@].+[\\.].+", message = "{size.validation}")
     private String email;
+
     @NotEmpty(message = "required.phone.validation")
     @Length(min = 3, max = 14, message = "size.validation")
     private String phone;
+
     @NotNull(message = "required.birth_date.validation")
     private LocalDate birthDate;
-
 
     @Pattern(regexp = "^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{6,}$", message = "{password.rule}")
     @Length(min = 6, max = 50, message = "{size.validation}")
@@ -36,10 +39,10 @@ public class PersonDto {
 
     private AuthenticationEntity auth;
 
-    public PersonDto(){
+    public PersonDto() {
     }
 
-    public PersonDto(PersonEntity personEntity){
+    public PersonDto(PersonEntity personEntity) {
         this.personId = personEntity.getPersonId();
         this.name = personEntity.getName();
         this.lastname = personEntity.getLastname();

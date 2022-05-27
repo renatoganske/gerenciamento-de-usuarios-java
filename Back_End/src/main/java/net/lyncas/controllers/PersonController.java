@@ -17,7 +17,7 @@ import java.net.URI;
 import java.util.List;
 
 @RestController
-@RequestMapping ("/users")
+@RequestMapping("/users")
 public class PersonController {
 
     @Autowired
@@ -27,7 +27,7 @@ public class PersonController {
     @Autowired
     private final PasswordEncoder encoder;
 
-    public PersonController(PersonService service, PersonRepository personRepository, PasswordEncoder encoder){
+    public PersonController(PersonService service, PersonRepository personRepository, PasswordEncoder encoder) {
         this.service = service;
         this.personRepository = personRepository;
         this.encoder = encoder;
@@ -40,7 +40,7 @@ public class PersonController {
     }
 
     @GetMapping
-    public ResponseEntity<List<PersonResponseDto>> findAll (){
+    public ResponseEntity<List<PersonResponseDto>> findAll() {
         List<PersonResponseDto> listarPersonResponseDto = service.findAll();
         return ResponseEntity.ok().body(listarPersonResponseDto);
     }
@@ -48,10 +48,9 @@ public class PersonController {
     @GetMapping("/{personId}")
     public ResponseEntity<PersonResponseDto> findById(@PathVariable Long personId) {
 
-        try{
-            return new ResponseEntity<>(service.findById(personId), HttpStatus.OK);}
-
-        catch(Exception exp){
+        try {
+            return new ResponseEntity<>(service.findById(personId), HttpStatus.OK);
+        } catch (Exception exp) {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
@@ -59,8 +58,8 @@ public class PersonController {
 
     @PostMapping("/newUser")
     public ResponseEntity<PersonResponseDto> saveUser(
-            @Valid @RequestBody PersonDto newPersonDTO, UriComponentsBuilder uriBuilder){
-        PersonResponseDto persistedPerson = service.saveUser(newPersonDTO);
+            @Valid @RequestBody PersonDto newPersonDTO, UriComponentsBuilder uriBuilder) {
+        PersonResponseDto persistedPerson = service.saveUser(newPersonDTO, true);
         URI uri = uriBuilder.path("/users/{id}").buildAndExpand(newPersonDTO.getPersonId()).toUri();
         return ResponseEntity.created(uri).body(persistedPerson);
     }
@@ -81,7 +80,7 @@ public class PersonController {
     }
 
     @DeleteMapping("/{personId}")
-    public void delete(@PathVariable Long personId){
+    public void delete(@PathVariable Long personId) {
         service.delete(personId);
     }
 

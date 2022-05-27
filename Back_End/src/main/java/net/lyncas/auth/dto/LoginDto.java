@@ -12,7 +12,7 @@ public class LoginDto {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idAuth;
-    private String  email;
+    private String email;
 
     @Pattern(regexp = "^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{6,}$", message = "A senha deve conter no mínimo 6 caracteres, "
             + "sendo pelo menos um deles um número.")

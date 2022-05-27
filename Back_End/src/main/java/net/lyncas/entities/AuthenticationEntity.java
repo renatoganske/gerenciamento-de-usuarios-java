@@ -4,17 +4,20 @@ import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 
 @Entity
-@Table(name="Authentication")
+@Table(name = "Authentication")
 public class AuthenticationEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idAuth;
+
     @NotEmpty
     @Column(length = 255, nullable = false)
     private String password;
+
     @Column(nullable = false)
     private Boolean status;
+
     @OneToOne
     @JoinColumn(name = "personId", nullable = false)
     private PersonEntity personEntity;

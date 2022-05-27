@@ -3,13 +3,11 @@ package net.lyncas.service;
 
 import net.lyncas.dtos.PersonDto;
 import net.lyncas.dtos.PersonResponseDto;
-import net.lyncas.entities.AuthenticationEntity;
 import net.lyncas.entities.PersonEntity;
 import net.lyncas.errorHandling.exception.business.EmailRuleException;
 import net.lyncas.errorHandling.exception.business.FindByIdRuleException;
 import net.lyncas.errorHandling.exception.business.PasswordRuleException;
 import net.lyncas.repository.PersonRepository;
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -52,25 +50,14 @@ public class PersonService {
         }
     }
 
-    public PersonResponseDto saveUser(PersonDto personDto) {
-        PersonEntity personEntity = new PersonEntity();
+    public PersonResponseDto saveUser(PersonDto personDto, Boolean status) {
+        PersonEntity personEntity = new PersonEntity(personDto, status);
         if (personRepository.existsByEmail(personDto.getEmail())) {
             throw new EmailRuleException();
         } else {
             if (personDto.getPassword() == null || personDto.getPassword().isEmpty()) {
                 throw new PasswordRuleException();
             } else {
-
-                personEntity.setPersonId(personDto.getPersonId());
-                personEntity.setName(personDto.getName());
-                personEntity.setLastname(personDto.getLastname());
-                personEntity.setEmail(personDto.getEmail());
-                personEntity.setPhone(personDto.getPhone());
-                personEntity.setBirthDate(personDto.getBirthDate());
-                AuthenticationEntity authentication = new AuthenticationEntity();
-                personEntity.setAuthentication(authentication);
-                personEntity.getAuthentication().setStatus(personDto.getStatus());
-                personEntity.getAuthentication().setPersonEntity(personEntity);
                 personEntity.getAuthentication().setPassword(encoder.encode(personDto.getPassword()));
                 PersonEntity newPersonEntity = personRepository.save(personEntity);
                 PersonResponseDto newPersonResponseDto = new PersonResponseDto(newPersonEntity);

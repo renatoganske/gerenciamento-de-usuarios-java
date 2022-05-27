@@ -36,12 +36,12 @@ public class JWTValidateFilter extends BasicAuthenticationFilter {
             return;
         }
 
-        if(!attribute.startsWith(PREFIX_ATTRIBUTE)) {
+        if (!attribute.startsWith(PREFIX_ATTRIBUTE)) {
             chain.doFilter(request, response);
             return;
         }
 
-        String token = attribute.replace (PREFIX_ATTRIBUTE, "");
+        String token = attribute.replace(PREFIX_ATTRIBUTE, "");
         UsernamePasswordAuthenticationToken authToken = getAuthToken(token);
 
         SecurityContextHolder.getContext().setAuthentication(authToken);
@@ -64,7 +64,7 @@ public class JWTValidateFilter extends BasicAuthenticationFilter {
             return null;
         }
 
-        return new UsernamePasswordAuthenticationToken(user,null, new ArrayList<>());
+        return new UsernamePasswordAuthenticationToken(user, null, new ArrayList<>());
     }
 }
 

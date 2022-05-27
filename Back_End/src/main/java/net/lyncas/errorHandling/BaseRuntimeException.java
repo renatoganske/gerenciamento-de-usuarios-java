@@ -10,6 +10,7 @@ public abstract class BaseRuntimeException extends RuntimeException implements M
     public BaseRuntimeException() {
         mapDetails = null;
     }
+
     public BaseRuntimeException(final Map<String, Object> mapDetails) {
         this.mapDetails = mapDetails;
     }

@@ -14,7 +14,7 @@ public class PersonResponseDto {
     private LocalDate birthDate;
     private Boolean status;
 
-    public PersonResponseDto(){
+    public PersonResponseDto() {
     }
 
     public PersonResponseDto(PersonEntity personEntity) {

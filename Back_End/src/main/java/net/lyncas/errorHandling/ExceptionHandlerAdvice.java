@@ -53,7 +53,8 @@ public class ExceptionHandlerAdvice {
         logger.error("Exception {}", exception.getClass().getName());
         MessageException messageException = (MessageException) exception;
         ErrorDto error = buildError(messageException.getExceptionKey(),
-                bindExceptionKeywords(messageException.getMapDetails(),messageException.getExceptionKey()));
+                bindExceptionKeywords(messageException.getMapDetails(),
+                        messageException.getExceptionKey()));
 
         Set<ErrorDto> errors = Set.of(error);
         ApiErrorDto apiErrorDto = baseErrorBuilder(getResponseStatus(exception), errors);

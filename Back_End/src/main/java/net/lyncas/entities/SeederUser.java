@@ -1,6 +1,5 @@
 package net.lyncas.entities;
 
-import net.lyncas.dtos.PersonDto;
 import net.lyncas.repository.PersonRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;

@@ -27,7 +27,7 @@ public class UserDetailServiceImpl implements UserDetailsService {
         Optional<PersonEntity> person = repository.findByEmail(username);
 
         if (person.isEmpty()) {
-            throw new UsernameNotFoundException("Usuário [" + username +"] não encontrado.");
+            throw new UsernameNotFoundException("Usuário [" + username + "] não encontrado.");
         }
 
         return new UserDetailData(person);
