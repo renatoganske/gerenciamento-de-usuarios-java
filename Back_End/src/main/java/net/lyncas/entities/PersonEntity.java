@@ -29,25 +29,12 @@ public class PersonEntity {
     private String phone;
     @Column(nullable = false)
     @NotNull
-    private LocalDate birth_date;
+    private LocalDate birthDate;
     @OneToOne (mappedBy = "personEntity", cascade = CascadeType.ALL)
     private AuthenticationEntity authentication;
 
     public PersonEntity() {
     }
-
-//    PersonEntity convertForPersonEntity(PersonDto personDto) {
-//        this.setPersonId(personDto.getPersonId());
-//        this.setName(personDto.getName());
-//        this.setLastname(personDto.getLastname());
-//        this.setEmail(personDto.getEmail());
-//        this.setPhone(personDto.getPhone());
-//        this.setBirth_date(personDto.getBirth_date());
-//        AuthenticationEntity authentication = new AuthenticationEntity();
-//        this.setAuthentication(authentication);
-//        this.getAuthentication().setStatus(personDto.getStatus());
-//        this.getAuthentication().setPersonEntity(this);
-//    }
 
     public Long getPersonId() {
         return personId;
@@ -89,12 +76,12 @@ public class PersonEntity {
         this.phone = phone;
     }
 
-    public LocalDate getBirth_date() {
-        return birth_date;
+    public LocalDate getBirthDate() {
+        return birthDate;
     }
 
-    public void setBirth_date(LocalDate birth_date) {
-        this.birth_date = birth_date;
+    public void setBirthDate(LocalDate birthDate) {
+        this.birthDate = birthDate;
     }
 
     public AuthenticationEntity getAuthentication() {

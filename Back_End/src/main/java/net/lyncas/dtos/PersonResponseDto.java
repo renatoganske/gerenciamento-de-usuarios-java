@@ -11,7 +11,7 @@ public class PersonResponseDto {
     private String lastname;
     private String email;
     private String phone;
-    private LocalDate birth_date;
+    private LocalDate birthDate;
     private Boolean status;
 
     public PersonResponseDto(){
@@ -23,7 +23,7 @@ public class PersonResponseDto {
         this.lastname = personEntity.getLastname();
         this.email = personEntity.getEmail();
         this.phone = personEntity.getPhone();
-        this.birth_date = personEntity.getBirth_date();
+        this.birthDate = personEntity.getBirthDate();
         this.status = personEntity.getAuthentication().getStatus();
     }
 
@@ -67,12 +67,12 @@ public class PersonResponseDto {
         this.phone = phone;
     }
 
-    public LocalDate getBirth_date() {
-        return birth_date;
+    public LocalDate getBirthDate() {
+        return birthDate;
     }
 
-    public void setBirth_date(LocalDate birth_date) {
-        this.birth_date = birth_date;
+    public void setBirth_date(LocalDate birthDate) {
+        this.birthDate = birthDate;
     }
 
     public Boolean getStatus() {

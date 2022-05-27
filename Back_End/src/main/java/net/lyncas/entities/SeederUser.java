@@ -33,7 +33,7 @@ public class SeederUser implements CommandLineRunner {
             seeder.setLastname("User");
             seeder.setEmail("admin@admin.com");
             seeder.setPhone("(47)99999-9999");
-            seeder.setBirth_date(LocalDate.now());
+            seeder.setBirthDate(LocalDate.now());
             seeder.setAuthentication(auth);
             auth.setPersonEntity(seeder);
             personRepository.save(seeder);

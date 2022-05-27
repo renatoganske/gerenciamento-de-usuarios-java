@@ -25,7 +25,7 @@ public class PersonDto {
     @Length(min = 3, max = 14, message = "size.validation")
     private String phone;
     @NotNull(message = "required.birth_date.validation")
-    private LocalDate birth_date;
+    private LocalDate birthDate;
 
 
     @Pattern(regexp = "^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{6,}$", message = "{password.rule}")
@@ -38,6 +38,17 @@ public class PersonDto {
 
     public PersonDto(){
     }
+
+    public PersonDto(PersonEntity personEntity){
+        this.personId = personEntity.getPersonId();
+        this.name = personEntity.getName();
+        this.lastname = personEntity.getLastname();
+        this.email = personEntity.getEmail();
+        this.phone = personEntity.getPhone();
+        this.birthDate = personEntity.getBirthDate();
+        this.status = personEntity.getAuthentication().getStatus();
+    }
+
 
     public Long getPersonId() {
         return personId;
@@ -79,12 +90,12 @@ public class PersonDto {
         this.phone = phone;
     }
 
-    public LocalDate getBirth_date() {
-        return birth_date;
+    public LocalDate getBirthDate() {
+        return birthDate;
     }
 
-    public void setBirth_date(LocalDate birth_date) {
-        this.birth_date = birth_date;
+    public void setBirth_date(LocalDate birthDate) {
+        this.birthDate = birthDate;
     }
 
     public String getPassword() {

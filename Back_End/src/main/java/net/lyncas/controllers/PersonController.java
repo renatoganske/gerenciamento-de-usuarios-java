@@ -3,21 +3,18 @@ package net.lyncas.controllers;
 import io.swagger.annotations.ApiParam;
 import net.lyncas.dtos.PersonDto;
 import net.lyncas.dtos.PersonResponseDto;
-import net.lyncas.entities.PersonEntity;
 import net.lyncas.repository.PersonRepository;
 import net.lyncas.service.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import javax.validation.Valid;
 import java.net.URI;
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping ("/users")

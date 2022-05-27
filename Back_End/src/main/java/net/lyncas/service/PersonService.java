@@ -9,6 +9,8 @@ import net.lyncas.errorHandling.exception.business.EmailRuleException;
 import net.lyncas.errorHandling.exception.business.FindByIdRuleException;
 import net.lyncas.errorHandling.exception.business.PasswordRuleException;
 import net.lyncas.repository.PersonRepository;
+import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -18,8 +20,9 @@ import java.util.Optional;
 
 @Service
 public class PersonService {
-
+    @Autowired
     private final PersonRepository personRepository;
+    @Autowired
     private final PasswordEncoder encoder;
 
     public PersonService(PersonRepository personRepository, PasswordEncoder encoder) {
@@ -57,12 +60,13 @@ public class PersonService {
             if (personDto.getPassword() == null || personDto.getPassword().isEmpty()) {
                 throw new PasswordRuleException();
             } else {
+
                 personEntity.setPersonId(personDto.getPersonId());
                 personEntity.setName(personDto.getName());
                 personEntity.setLastname(personDto.getLastname());
                 personEntity.setEmail(personDto.getEmail());
                 personEntity.setPhone(personDto.getPhone());
-                personEntity.setBirth_date(personDto.getBirth_date());
+                personEntity.setBirthDate(personDto.getBirthDate());
                 AuthenticationEntity authentication = new AuthenticationEntity();
                 personEntity.setAuthentication(authentication);
                 personEntity.getAuthentication().setStatus(personDto.getStatus());
@@ -70,7 +74,6 @@ public class PersonService {
                 personEntity.getAuthentication().setPassword(encoder.encode(personDto.getPassword()));
                 PersonEntity newPersonEntity = personRepository.save(personEntity);
                 PersonResponseDto newPersonResponseDto = new PersonResponseDto(newPersonEntity);
-
                 return newPersonResponseDto;
             }
         }
@@ -92,7 +95,7 @@ public class PersonService {
             personEntity.setLastname(updatingPersonDto.getLastname());
             personEntity.setEmail(updatingPersonDto.getEmail());
             personEntity.setPhone(updatingPersonDto.getPhone());
-            personEntity.setBirth_date(updatingPersonDto.getBirth_date());
+            personEntity.setBirthDate(updatingPersonDto.getBirthDate());
             personEntity.getAuthentication().setStatus(updatingPersonDto.getStatus());
             personEntity.getAuthentication().setPassword(encoder.encode(password));
             personRepository.save(personEntity);
