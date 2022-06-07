@@ -5,7 +5,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="fc0e1fbc-ac9e-4599-add4-cf871fd19c69" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Back_End/src/main/java/net/lyncas/entities/AuthenticationEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/Back_End/src/main/java/net/lyncas/entities/AuthenticationEntity.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
