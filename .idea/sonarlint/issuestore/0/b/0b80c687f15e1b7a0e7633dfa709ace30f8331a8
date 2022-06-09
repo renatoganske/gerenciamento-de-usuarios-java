@@ -1,0 +1,11 @@
+
+t
+java:S1488."^Immediately return this expression instead of assigning it to the temporary variable "person".(óôó¨
+‚
+java:S1488?"lImmediately return this expression instead of assigning it to the temporary variable "newPersonResponseDto".(õãÃ¿
+z
+java:S1488Y"_Immediately return this expression instead of assigning it to the temporary variable "updated".(ƒë¡õÿÿÿÿÿ
+L
+java:S54117"*Use the primitive boolean expression here.(ºíÓ‡øÿÿÿÿ8¦ôæÌ’0
+z
+java:S3655b"XCall "personEntity.isPresent()" or "!personEntity.isEmpty()" before accessing the value.(•Ì‚íøÿÿÿÿ8ûôæÌ’0
