@@ -1,6 +1,5 @@
 package net.lyncas.controllers;
 
-import io.swagger.annotations.ApiParam;
 import net.lyncas.dtos.PersonDto;
 import net.lyncas.dtos.PersonResponseDto;
 import net.lyncas.repository.PersonRepository;
@@ -31,12 +30,6 @@ public class PersonController {
         this.service = service;
         this.personRepository = personRepository;
         this.encoder = encoder;
-    }
-
-
-    @PostMapping("/login")
-    public void fakeLogin(@ApiParam("User") @RequestParam String email, @ApiParam("Password") @RequestParam String password) {
-        throw new IllegalStateException("This method shouldn't be called. It's implemented by Spring Security filters.");
     }
 
     @GetMapping

@@ -5,7 +5,35 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="fc0e1fbc-ac9e-4599-add4-cf871fd19c69" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/Back_End/src/main/java/net/lyncas/repository/PersonRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/Back_End/src/main/java/net/lyncas/repository/PersonRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_fasterxml_jackson_dataformat_jackson_dataformat_yaml_2_13_2.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__io_swagger_core_v3_swagger_annotations_2_2_0.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__io_swagger_core_v3_swagger_core_2_2_0.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__io_swagger_core_v3_swagger_models_2_2_0.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__jakarta_validation_jakarta_validation_api_2_0_2.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springdoc_springdoc_openapi_common_1_6_9.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springdoc_springdoc_openapi_ui_1_6_9.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springdoc_springdoc_openapi_webmvc_core_1_6_9.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_webjars_swagger_ui_4_11_1.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_google_guava_guava_20_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__io_springfox_springfox_core_2_9_2.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__io_springfox_springfox_schema_2_9_2.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__io_springfox_springfox_spi_2_9_2.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__io_springfox_springfox_spring_web_2_9_2.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__io_springfox_springfox_swagger2_2_9_2.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__io_springfox_springfox_swagger_common_2_9_2.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__io_springfox_springfox_swagger_ui_2_9_2.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__io_swagger_swagger_annotations_1_5_20.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__io_swagger_swagger_models_1_5_20.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_mapstruct_mapstruct_1_2_0_Final.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_plugin_spring_plugin_core_1_2_0_RELEASE.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_plugin_spring_plugin_metadata_1_2_0_RELEASE.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Back_End/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Back_End/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Back_End/src/main/java/net/lyncas/LyncasApiApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/Back_End/src/main/java/net/lyncas/LyncasApiApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Back_End/src/main/java/net/lyncas/auth/security/JWTConfiguration.java" beforeDir="false" afterPath="$PROJECT_DIR$/Back_End/src/main/java/net/lyncas/auth/security/JWTConfiguration.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Back_End/src/main/java/net/lyncas/config/SwaggerConfiguration.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Back_End/src/main/java/net/lyncas/controllers/PersonController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Back_End/src/main/java/net/lyncas/controllers/PersonController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Back_End/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/Back_End/src/main/resources/application.properties" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -27,7 +55,7 @@
       <map>
         <entry key="com.haulmont.jpb.jpaInspector" value="false" />
         <entry key="com.haulmont.jpb.jpaPalette" value="false" />
-        <entry key="com.haulmont.jpb.jpaStructure" value="true" />
+        <entry key="com.haulmont.jpb.jpaStructure" value="false" />
       </map>
     </option>
   </component>
@@ -53,6 +81,7 @@
   "keyToString": {
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "last_opened_file_path": "C:/workspace/projeto-renato-java",
     "project.structure.last.edited": "Project",
     "project.structure.proportion": "0.15",
@@ -104,16 +133,16 @@
     </task>
     <servers />
   </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/Back_End/src/main/java/net/lyncas/LyncasApiApplication.java</url>
-          <line>12</line>
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

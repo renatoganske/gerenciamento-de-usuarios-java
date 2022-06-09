@@ -30,7 +30,9 @@ public class JWTConfiguration extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable().authorizeRequests()
                 .antMatchers(HttpMethod.POST, "/login").permitAll()
-                .anyRequest().authenticated()
+                //para acessar a documentação pelo swagger: .anyRequest().permitAll()
+                //para habilitar a segurança utilizar: .anyRequest().authenticated()
+                .anyRequest().permitAll()
                 .and()
                 .addFilter(new JWTAuthFilter(authenticationManager()))
                 .addFilter(new JWTValidateFilter(authenticationManager()))
