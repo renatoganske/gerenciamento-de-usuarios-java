@@ -33,7 +33,7 @@ public class JWTConfiguration extends WebSecurityConfigurerAdapter {
 
                 //para acessar a documentação pelo swagger: .anyRequest().permitAll()
                 //para habilitar a segurança utilizar: .anyRequest().authenticated()
-                .anyRequest().permitAll()
+                .anyRequest().authenticated()
                 .and()
                 .addFilter(new JWTAuthFilter(authenticationManager()))
                 .addFilter(new JWTValidateFilter(authenticationManager()))
